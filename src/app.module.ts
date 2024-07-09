@@ -2,6 +2,7 @@ import {Module} from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
+import { User } from './users/users.model';
 
 /* (@Module - декоратор - обертка над классом/функцией, добавляющая новый функционал) */
 @Module({ 
@@ -9,7 +10,7 @@ import { ConfigModule } from '@nestjs/config';
     providers: [], /* (провайдеры - массив с переиспользуемыми компонентами логики, например сервисами) */
     imports: [ /* (imports - массив для подключения импортированных модулей) */
         ConfigModule.forRoot({
-            envFilePath: '.env'
+            envFilePath: `.${process.env.NODE_ENV}.env` /* (с помощью cross-env модуля при запуске передаем переменную NODE_ENV - production или development) */
         }), /* (пример подключения конфигов с переменными env) */
         SequelizeModule.forRoot({ /* (фреймворк для работы с БД) */
           dialect: 'postgres',
@@ -18,7 +19,7 @@ import { ConfigModule } from '@nestjs/config';
           username: process.env.POSTGRES_USER, /* (postgres - по умолчанию) */
           password: process.env.POSTGRESS_PASSWORD, /* (код доступа к БД) */
           database: process.env.POSTGRES_DB, /* (имя подключаемой БД) */
-          models: [],
+          models: [User], /* (модели подключаемых таблиц) */
           autoLoadModels: true /* (разрешение для sequelize создавать таблицы в БД на основе моделей(выше)) */
         }), UsersModule,
     ],
