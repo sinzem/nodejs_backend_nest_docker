@@ -1,4 +1,4 @@
-/* (Приложение на nestjs(платформа для создания эффективных масштабируемых программ Node) и ts) */
+/* (Приложение на nestjs(платформа для создания эффективных масштабируемых программ Node) и ts, план урока на скрине в папке basket) */
 
 // npm i -g @nestjs/cli - установка nest(глобально)
 // nest new nest-course - создаем новый проект(nest-course - название)
@@ -8,6 +8,20 @@
         // /test
         // src очистил полностью
 
-// В отличии от не используем роутер, эндпоинты создаем с помощью декораторов - пример в src/app.modules.ts и app.controller.ts
+// В отличии от react не используем роутер, эндпоинты создаем с помощью декораторов - пример в basket/app.modules.ts и basket/app.controller.ts
 
 // npm run start:dev - запуск
+
+// npm i --save @nestjs/sequelize sequelize sequelize-typescript /* (фреймворк для работы с БД) */
+// npm install --save-dev @types/sequelize /* (типы для sequelize) */
+// npm i --save pg pg-hstore
+
+// Скачиваем и устанавливаем Postgres, запускаем pgAdmin 4, создаем БД - пример подключения в app.module.ts
+
+// nest generate
+    // Пример создания документов через терминал - nest generate module users - в папке users создается модуль с таким же названием, заготовкой для работы внутри и автоматически помещается в импорты в app.module.ts
+        // nest generate controller users
+        // nest generate service users - созданные сервис и контроллер также автоматически добавились в users.module.ts
+            // С последними двумя создались скрипты для тестировки - они не нужны, можно удалить
+
+// npm i @nestjs/config - для подключения файлов конфигурации(.env с настройками,пример подключения в app.module.ts - ConfigModule в импортах)
