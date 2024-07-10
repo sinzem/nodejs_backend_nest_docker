@@ -33,3 +33,8 @@
 // nest generate module roles - создаем модуль для управления ролями пользователя
         // nest generate service roles
         // nest generate controller roles
+
+// nest generate module auth - создаем модуль для авторизации
+        // nest generate service auth
+        // nest generate controller auth
+// npm i @nestjs/jwt bcryptjs - подули для генерации паролей

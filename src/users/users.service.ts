@@ -15,6 +15,7 @@ export class UsersService {
         const user = await this.userRepository.create(dto);
         const role = await this.roleService.getRoleByValue("USER"); /* (получаем роль для пользователя из таблицы - будем присваивать по умолчанию) */
         await user.$set('roles', [role.id]); /* ($set - добавит к обьекту пользователя указанные ключ('roles') и значение) */
+        user.roles = [role]; /* (добавляем к обьекту массив с ролями - понадобится при генерации токена) */
         return user;
     }
 
@@ -22,5 +23,10 @@ export class UsersService {
     async getAllUsers() {
         const users = await this.userRepository.findAll({include: {all: true}});
         return users;
+    }
+
+    async getUserByEmail(email: string) {
+        const user = await this.userRepository.findOne({where: {email}, include: {all:true}});
+        return user;
     }
 }

@@ -13,6 +13,7 @@ import { RolesModule } from 'src/roles/roles.module';
   imports: [
     SequelizeModule.forFeature([User, Role, UserRoles]), /* (подключаем модели используемых таблиц(User будет связан с Role как многие-ко-многим через таблицу UserRole)) */
     RolesModule /* (подключаем модуль для работы с ролями - при создании пользователя нужно сразу прописать ему роль) */
-  ]
+  ],
+  exports: [UsersService] /* (экспортируем сервисы - понадобятся при регистрации пользователя) */
 })
 export class UsersModule {}
