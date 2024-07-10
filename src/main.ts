@@ -1,6 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 
 async function start() {
     const PORT = process.env.PORT || 5000;
@@ -14,7 +15,9 @@ async function start() {
         .addTag('ULBI TV')
         .build()
     const document = SwaggerModule.createDocument(app, config); /* (cоздаем документацию, передаем приложение и конфигурацию, в контроллере добавляем опции для описания эндпоинтов, также в моделях(users.model.ts) задаем описание каждой колонке) */
-    SwaggerModule.setup('api/docs', app, document) /* (по указанному пути можно смотреть документацию(localhost:5000/api/docs)) */
+    SwaggerModule.setup('api/docs', app, document); /* (по указанному пути можно смотреть документацию(localhost:5000/api/docs)) */
+
+    // app.useGlobalGuards(JwtAuthGuard); /* (пример глобального блокирования незарегистрированных пользователей) */
 
     await app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 }
