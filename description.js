@@ -27,3 +27,9 @@
 // npm i @nestjs/config - для подключения файлов конфигурации(.env с настройками,пример подключения в app.module.ts - ConfigModule в импортах)
 
 // npm i cross-env - для передачи переменных среды в команде запуска - в package.json в командах запуска добавляем переменную с режимом разработки(от него зависит подключаемый .env-документ - в app.module.ts)
+
+// npm i @nestjs/swagger swagger-ui-express - для документирования rest API, подключаем в main.ts, в эндпоинты и модели, в dto
+
+// nest generate module roles - создаем модуль для управления ролями пользователя
+        // nest generate service roles
+        // nest generate controller roles
