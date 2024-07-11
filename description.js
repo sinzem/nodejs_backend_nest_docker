@@ -37,4 +37,4 @@
 // nest generate module auth - создаем модуль для авторизации
         // nest generate service auth
         // nest generate controller auth
-// npm i @nestjs/jwt bcryptjs - подули для генерации паролей
+// npm i @nestjs/jwt bcryptjs - модули для генерации паролей

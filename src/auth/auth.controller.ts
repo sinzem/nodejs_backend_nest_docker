@@ -3,9 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { AuthService } from './auth.service';
 
-@Controller('auth')
-
-@ApiTags('Авторизация') /* (для документации swagger) */
+// @ApiTags('Авторизация') /* (для документации swagger) */
 @Controller('auth') /* (localhost:5000/auth) */
 export class AuthController {
     
