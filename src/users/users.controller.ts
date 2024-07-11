@@ -6,6 +6,8 @@ import { User } from './users.model';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/auth/roles-auth.decorator';
 import { RolesGuard } from 'src/auth/roles-guard';
+import { AddRoleDto } from './dto/add-role.dto';
+import { BanUserDto } from './dto/ban-user.dto';
 
 @ApiTags('Пользователи') /* (декоратор для описания swagger) */
 @Controller('users') /* (создаем контроллеры, тестируем через postman(получился localhost:5000/users)) */
@@ -31,5 +33,23 @@ export class UsersController {
     @Get()
     getAll() {
         return this.usersService.getAllUsers();
+    }
+
+    @ApiOperation({summary: "Выдача ролей"})
+    @ApiResponse({status: 200})
+    @Roles('ADMIN') /* (кастомный декоратор, добавит в контекст список ролей, которым разрешен доступ(прописываем через запятую)) */
+    @UseGuards(RolesGuard) /* (через декоратор UseGuards подключаем guard - модуль для ограничения доступа) */
+    @Post('/role')
+    addRole(@Body() dto: AddRoleDto) {
+        return this.usersService.addRole(dto);
+    }
+
+    @ApiOperation({summary: "Бан пользователей"})
+    @ApiResponse({status: 200})
+    @Roles('ADMIN') /* (кастомный декоратор, добавит в контекст список ролей, которым разрешен доступ(прописываем через запятую)) */
+    @UseGuards(RolesGuard) /* (через декоратор UseGuards подключаем guard - модуль для ограничения доступа) */
+    @Post('/ban')
+    ban(@Body() dto: BanUserDto) {
+        return this.usersService.ban(dto);
     }
 }

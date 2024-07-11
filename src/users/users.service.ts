@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './users.model';
 import { CreateUserDto } from './dto/create-user.dto';
 import { RolesService } from 'src/roles/roles.service';
+import { AddRoleDto } from './dto/add-role.dto';
+import { BanUserDto } from './dto/ban-user.dto';
 
 @Injectable() /* (создаем класс для иньекции - cb-функции для контроллера) */
 export class UsersService {
@@ -27,6 +29,29 @@ export class UsersService {
 
     async getUserByEmail(email: string) {
         const user = await this.userRepository.findOne({where: {email}, include: {all:true}});
+        return user;
+    }
+
+    /* (функция для выдачи роли пользователю, получает обьект с названием роли и id юзера) */
+    async addRole(dto: AddRoleDto) {
+        const user = await this.userRepository.findByPk(dto.userId); /* (находим в БД по id) */
+        const role = await this.roleService.getRoleByValue(dto.value); /* (находим роль по названию) */
+        if (role && user) {
+            await user.$add('role', role.id); /* (метод $add добавит нужное поле к пользователю) */
+            return dto;
+        }
+        throw new HttpException("Пользователь или роль не найдены", HttpStatus.NOT_FOUND)
+    }
+
+    /* (баним пользователя) */
+    async ban(dto: BanUserDto) {
+        const user = await this.userRepository.findByPk(dto.userId); /* (находим в БД по id) */
+        if (!user) {
+            throw new HttpException("Пользователь не найден", HttpStatus.NOT_FOUND)
+        }
+        user.banned = true;
+        user.banReason = dto.banReason;
+        await user.save();
         return user;
     }
 }
