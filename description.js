@@ -41,4 +41,7 @@
 
 // npm i class-validator class-transformer - для валидации, используем в pipes и dto
 
+// nest generate module posts - создаем модуль для постов
+        // nest generate service posts
+        // nest generate controller posts
 

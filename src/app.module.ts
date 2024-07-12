@@ -7,6 +7,8 @@ import { RolesModule } from './roles/roles.module';
 import { Role } from './roles/roles.model';
 import { UserRoles } from './roles/user-roles.model';
 import { AuthModule } from './auth/auth.module';
+import { PostsModule } from './posts/posts.module';
+import { Post } from './posts/posts.model';
 
 /* (@Module - декоратор - обертка над классом/функцией, добавляющая новый функционал) */
 @Module({ 
@@ -23,9 +25,9 @@ import { AuthModule } from './auth/auth.module';
           username: process.env.POSTGRES_USER, /* (postgres - по умолчанию) */
           password: process.env.POSTGRESS_PASSWORD, /* (код доступа к БД) */
           database: process.env.POSTGRES_DB, /* (имя подключаемой БД) */
-          models: [User, Role, UserRoles], /* (модели подключаемых таблиц) */
+          models: [User, Role, UserRoles, Post], /* (модели подключаемых таблиц) */
           autoLoadModels: true /* (разрешение для sequelize создавать таблицы в БД на основе моделей(выше)) */
-        }), UsersModule, RolesModule, AuthModule,
+        }), UsersModule, RolesModule, AuthModule, PostsModule,
     ],
 })
 export class AppModule {}

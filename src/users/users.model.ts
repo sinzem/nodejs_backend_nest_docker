@@ -1,6 +1,7 @@
 /* (модель для создания таблицы users в БД) */
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Post } from "src/posts/posts.model";
 import { Role } from "src/roles/roles.model";
 import { UserRoles } from "src/roles/user-roles.model";
 
@@ -37,4 +38,7 @@ export class User extends Model<User, UserCreationAttrs> {
      /* (подключаем таблицу Role связью многие-ко-многим через таблицу UserRoles) */
      @BelongsToMany(() => Role, () => UserRoles)
      roles: Role[];
+
+     @HasMany(() => Post) /* (подключаем таблицу постов(один ко многим)) */
+     posts: Post[];
 } /* (подключаем в app.module.ts в массив с моделями и в user.module.ts в импорты) */
