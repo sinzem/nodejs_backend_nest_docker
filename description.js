@@ -38,3 +38,7 @@
         // nest generate service auth
         // nest generate controller auth
 // npm i @nestjs/jwt bcryptjs - модули для генерации паролей
+
+// npm i class-validator class-transformer - для валидации, используем в pipes и dto
+
+
