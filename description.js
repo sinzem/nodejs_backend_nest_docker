@@ -52,3 +52,7 @@
 
 // npm i --save @nestjs/serve-static - для работы со статическими файлами(в д.с с загруженными изображениями в dist/static - по запросу localhost:5000/имя файла - выдает изображение), регистрируем в app.module.ts
 
+// Устанавливаем докер, рабочие документы - Dockerfile и docker-compose.yml
+// docker-compose build  - запуск сборки
+// docker-compose up - запуск приложения(предварительно в .development.env меняем хост postgres с POSTGRES_HOST=localhost на POSTGRES_HOST=postgres)
+

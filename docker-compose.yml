@@ -1,0 +1,45 @@
+version: "3.0"
+
+# (подключаемые сервисы - main(само приложение) и postgres(БД))
+services:
+  main: 
+    # (имя контейнера)
+    container_name: main
+    build: 
+      # (контекстом указываем текущую папку)
+      context: .
+    env_file:
+      # (файл среды)
+      - .development.env
+    # (настройка для отслеживания изменений в режиме разработки)
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 5000:5000
+        # (порт для дебага)
+      - 9229:9229
+    # (команда запуска)
+    command: npm run start:dev
+    # (зависимость - от postgres)
+    depends_on:
+      - postgres
+    restart: always
+  postgres:
+    # (имя контейнера)
+    container_name: postgres
+    # (образ - версия)
+    image: postgres:12
+    env_file: 
+      - .development.env
+    environment:
+      # (системная переменная - по документации)
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata: /var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
