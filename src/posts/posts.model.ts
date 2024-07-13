@@ -3,8 +3,10 @@ import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize
 import { User } from "src/users/users.model";
 
 interface PostCreationAttrs {
-    email: string;
-    password: string;
+    title: string;
+    content: string;
+    userId: number;
+    image: string;
 } /* (интерфейс для создания обьекта из этого класса, остальные поля не понадобятся) */
 
 @Table({tableName: 'posts'}) /* (c помощью декоратора обозначаем, что это таблица, передаем название) */

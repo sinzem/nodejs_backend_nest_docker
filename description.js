@@ -43,5 +43,12 @@
 
 // nest generate module posts - создаем модуль для постов
         // nest generate service posts
-        // nest generate controller posts
+        // 
+        
+// nest generate module files - модуль для работы  с файлами
+        // nest generate service files - /* (controller не понадобится) */
+
+// npm i uuid - для генерации случайных значений(для названия загружаемого файла в д.с)
+
+// npm i --save @nestjs/serve-static - для работы со статическими файлами(в д.с с загруженными изображениями в dist/static - по запросу localhost:5000/имя файла - выдает изображение), регистрируем в app.module.ts
 
